@@ -1,0 +1,105 @@
+.element-center{
+    margin: 0 auto;
+}
+
+.home-button{
+    width: 40px !important;
+    padding: 15px;
+    border-radius: 0 !important;
+}
+.student-profile{
+    margin: auto;
+    margin-top: 50px;
+    width: 50%;
+    height: 700px;
+    background-color:#ffa700de
+}
+
+.student-profile-title{
+    text-align: center;
+    color: white;
+    margin-top: 0 auto;
+}
+
+.student-icon{
+    width:30px !important;
+    height: 30px !important;
+    border-radius: 0 !important;
+    margin: auto;
+}
+
+img{
+    display: block;
+    width: 200px;
+    margin: auto;
+    margin-bottom: 50px;
+    border-radius: 70%;
+}
+/* .image-holder{
+    width: 200px;
+} WHy does this not work? */ 
+
+/* .student-table{
+    margin: auto !important
+} */
+
+.main-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: auto;
+    margin-left: 300px;
+    margin-right: 300px
+
+}
+
+
+tbody th{
+    size: 20px;
+    background-color: saddlebrown;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    color: white;
+    letter-spacing: 2px;
+    padding: 8px;
+}
+
+
+tbody td{
+    display: table-cell;
+    vertical-align: inherit;
+    text-align: center;
+    letter-spacing: 1px;
+    padding: 8px
+}
+
+tbody tr:nth-child(odd){
+    background-color: aliceblue
+}
+tbody tr:nth-child(even){
+    background-color: white
+}
+table {
+    display: table;
+    justify-self: center;
+    border: 2px solid white;
+    border-spacing:2px;
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+ }
+
+ table.center{
+     margin-left:auto;
+     margin-right:auto
+ }
+
+ tr.data_row td{
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    background-color: #ffff004f;
+    color: #795548e6;
+    padding: 8px;
+ }

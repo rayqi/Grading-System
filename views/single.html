@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SINGLE STUDENT</title>
+    <link rel="stylesheet" href="/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="student-profile element-center">
+        <a href="/">
+            <img class="home-button" src=" http://www.myiconfinder.com/uploads/iconsets/256-256-e414d7db351dac6a4e7223bbd16706c9-school.png">
+            </img> </a>
+        <h1 class="student-profile-title"></h1>
+
+        <div class='image-holder'>
+        </div>
+        <table id="student-table">
+            <tr>
+                <th class="table-header-title">SUBJECT</th>
+                <th class="table-header-title">SCORE</th>
+            </tr>
+
+        </table>
+        <script>
+            var randomNum = Math.floor(Math.random() * Math.floor(100))
+
+            const createImg = () => {
+                const newImg = document.createElement('img')
+                newImg.setAttribute('src', "http://api.adorable.io/avatars/9" + `${randomNum}`)
+                $(".image-holder").append(newImg)
+            }
+
+            const addHeader = (data) => {
+                $(".student-profile-title").append("<h1>" + data.firstname.toUpperCase() + " " + data.lastname.toUpperCase() + "</h1>")
+            }
+
+            const getGrades = (data) => {
+                console.log('getGrades', data)
+                let listOfGrades = data
+                for (let i = 0; i < listOfGrades.length; i++) {
+                    let eachTest = listOfGrades[i]
+                    $("#student-table").append("<tr class='data_row'><td>" + eachTest.subject + "</td>" + "<td class='data_score'>" + eachTest.score + "</tr></td>")
+
+                }
+            }
+
+
+            let url = window.location.pathname
+            let arr = url.split('/')
+            let query = arr[arr.length - 1]
+
+            const loadStudentProfile = () => {
+                $.ajax({
+                    url: "/api/students/" + query,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (results) {
+                        let data = results.data
+
+                        console.log('data', data)
+                        addHeader(data)
+                        createImg()
+                        // getSingleData(data)
+                    }
+                }).then(
+                    $.ajax({
+                        url: "/api/grades/" + query,
+                        type: "GET",
+                        dataType: "json",
+                        success: function (results) {
+                            let data = results.data
+                            console.log('grade', data)
+                            getGrades(data)
+                        }
+                    })
+                )
+            }
+
+            $(document).ready(() => {
+                loadStudentProfile();
+            })
+        </script>
+    </div>
+</body>
+
+</html>

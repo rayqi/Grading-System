@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width initial-scale=1.0'>
+    <title>MINI REPORT CARD</title>
+    <link href="https://s.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen,projection">
+    <link rel="stylesheet" href="/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+</head>
+
+<body>
+    <div class="main-page element-center">
+        <h1 class="main-page-title element-center">REPORT CARDS</h1>
+        <table class="all-students-table element-center">
+            <tbody>
+                <tr>
+                    <th class="table-header-title">ID</th>
+                    <th class="table-header-title">Firstname</th>
+                    <th class="table-header-title">Lastname</th>
+                    <th class="table-header-title">Gender</th>
+                    <th class="table-header-title">Profile</th>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class='search-title'>FILTER BY: </div>
+        <input class='search-bar' type="text" id="search_bar" placeholder="Search for students" onkeyup="searchFor()"></input>
+        <script>
+            const getData = (data) => {
+                $.each(data, function (i, val) {
+                    // $(".all-students-table").append("<tr class='data_row'><td>" + val.id + "</td>" + "<td><a href='students/" + val.id + "'>" + val.firstname + "</a></td>" + "<td>" + val.lastname + "</td>" + "<td>" + val.gender + "</td>" + "</td>" + "<td><a href='students/" + val.id + "'>" + "<img class='student-icon' src='https://image.flaticon.com/icons/svg/123/123793.svg'> </img>" + "</a></td>" + "<td>" + "</tr>")
+
+                    $(".all-students-table").append("<tr class='data_row'><td>" + val.id + "</td>" + "<td>" + val.firstname + "</td>" + "<td>" + val.lastname + "</td>" + "<td>" + val.gender + "</td>" + "</td>" + "<td><a href='students/" + val.id + "'>" + "<img class='student-icon' src='https://image.flaticon.com/icons/svg/123/123793.svg'> </img>" + "</a></td>" + "<td>" + "</tr>")
+                })
+            }
+
+            $.ajax({
+                url: "/api/students",
+                type: "GET",
+                dataType: "json",
+                success: function (results) {
+                    let data = results.data
+                    getData(data)
+                }
+            })
+
+            const searchFor = () => {
+                let input = document.getElementById("search_bar")
+                let filter = input.value.toLowerCase()
+
+
+                const allInputData = $("tr")
+                for (let i = 1; i < allInputData.length; i++) {
+                    let row = allInputData[i]
+                    if (row.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                        row.style.display = ""
+                    } else {
+                        row.style.display = "none";
+                    }
+                }
+
+            }
+
+
+        </script>
+    </div>
+</body>
+
+</html>
